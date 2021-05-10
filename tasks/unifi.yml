@@ -1,0 +1,43 @@
+---
+
+- name: Creates Unifi server certs directory
+  file:
+    path: "{{ letsencrypt_unifi_path }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+    recurse: yes
+  tags: unifi
+
+- name: Copy private key to Unifi server
+  copy:
+    src: "~/.ansible/certs/{{ unifi_hostname }}/privkey.pem"
+    dest: "{{ letsencrypt_unifi_path }}privkey.pem"
+    owner: root
+    group: root
+    mode: '0644'
+  tags: unifi
+
+- name:  Copy certificate to Unifi server
+  copy:
+    src: "~/.ansible/certs/{{ unifi_hostname }}/fullchain.pem"
+    dest: "{{ letsencrypt_unifi_path }}fullchain.pem"
+    owner: root
+    group: root
+    mode: '0644'
+  tags: unifi
+
+- name: Create SSL import script to Unifi server
+  template:
+    src: unifi_ssl_import.sh.j2
+    dest: "{{ letsencrypt_unifi_path }}unifi_ssl_import.sh"
+    owner: root
+    group: root
+    mode: '0744'
+  tags: unifi
+
+- name: Execute certs update on Unifi server
+  shell: "{{ letsencrypt_unifi_path }}unifi_ssl_import.sh"
+  tags: unifi
+  

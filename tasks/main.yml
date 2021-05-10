@@ -1,0 +1,17 @@
+---
+
+# Set-up new Letsencrypt domain
+
+- name: Import Letsencrypt vars
+  include_vars: letsencrypt_vars.yml
+  tags:
+    - zabbix
+    - unifi
+
+- name: Copy certs to Zabbix client
+  include_tasks: zabbix.yml
+  tags: zabbix
+
+- name: Copy certs to Unifi client
+  include_tasks: unifi.yml
+  tags: unifi

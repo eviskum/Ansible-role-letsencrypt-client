@@ -1,0 +1,6 @@
+---
+
+# Default for letsencrypt client set-up
+
+letsencrypt_zabbix_path: "/etc/zabbix/certs/"
+letsencrypt_unifi_path: "/etc/letsencrypt/live/{{ unifi_hostname }}/"

@@ -1,0 +1,30 @@
+---
+
+- name: Creates Zabbix server certs directory
+  file:
+    path: "{{ letsencrypt_zabbix_path }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+    recurse: yes
+  tags: zabbix
+
+- name: Copy private key to Zabbix server
+  copy:
+    src: "/etc/ansible/certs/{{ letsencrypt_new_domain }}/privkey.pem"
+    dest: "{{ letsencrypt_zabbix_path }}privkey.pem"
+    owner: root
+    group: root
+    mode: '0644'
+  tags: zabbix
+
+- name:  Copy certificate to Zabbix server
+  copy:
+    src: "/etc/ansible/certs/{{ letsencrypt_new_domain }}/fullchain.pem"
+    dest: "{{ letsencrypt_zabbix_path }}fullchain.pem"
+    owner: root
+    group: root
+    mode: '0644'
+  tags: zabbix
+  

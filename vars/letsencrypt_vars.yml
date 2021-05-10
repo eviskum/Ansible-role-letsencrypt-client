@@ -1,0 +1,5 @@
+---
+
+# Default for letsencrypt client set-up
+
+letsencrypt_path: "/etc/letsencrypt/live/"
