@@ -22,7 +22,7 @@
 # and be back online immediately.
 
 # CONFIGURATION OPTIONS
-UNIFI_HOSTNAME=unifi1.viskum-net.dk
+UNIFI_HOSTNAME=unifi.viskum-net.dk
 UNIFI_SERVICE=unifi
 
 # Uncomment following three lines for Fedora/RedHat/CentOS
