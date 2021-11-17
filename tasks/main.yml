@@ -7,6 +7,7 @@
   tags:
     - zabbix
     - unifi
+    - plex
 
 - name: Copy certs to Zabbix client
   include_tasks: zabbix.yml
@@ -15,3 +16,7 @@
 - name: Copy certs to Unifi client
   include_tasks: unifi.yml
   tags: unifi
+
+- name: Copy certs to Plex client
+  include_tasks: plex-nginx.yml
+  tags: plex

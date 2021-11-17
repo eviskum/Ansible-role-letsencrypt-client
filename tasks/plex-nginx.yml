@@ -1,0 +1,35 @@
+---
+
+- name: Creates Unifi server certs directory
+  file:
+    path: "{{ letsencrypt_plex_path }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+    recurse: yes
+  tags: plex
+
+- name: Copy private key to Plex nginx server
+  copy:
+    src: "~/.ansible/certs/{{ plex_hostname }}/privkey.pem"
+    dest: "{{ letsencrypt_plex_path }}privkey.pem"
+    owner: root
+    group: root
+    mode: '0644'
+  tags: plex
+
+- name:  Copy certificate to Plex nginx server
+  copy:
+    src: "~/.ansible/certs/{{ plex_hostname }}/fullchain.pem"
+    dest: "{{ letsencrypt_plex_path }}fullchain.pem"
+    owner: root
+    group: root
+    mode: '0644'
+  tags: plex
+
+- name: Restart nginx
+  service:
+    name: 'nginx'
+    state: 'restarted'
+  tags: plex
